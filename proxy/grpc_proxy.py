@@ -9,6 +9,7 @@ import go.logging
 
 from grpc.beta import implementations
 from grpc.framework.foundation import logging_pool
+from grpc import StatusCode
 
 from gevent.event import AsyncResult
 
@@ -36,7 +37,6 @@ class GeventTimer(object):
                 if response:
                     asyc_result.set(response)
                 else:
-                    print "God something is wrong", seq, response, exception
                     asyc_result.set_exception(exception)
         except Exception:
             traceback.print_exc()
@@ -92,8 +92,7 @@ class GrpcProxy(threading.Thread):
             response = stub_method.future(request, self.TIMEOUT_SECONDS)
             response.seq = seq
             response.add_done_callback(self.grpc_done_cb)
-            print "xxxxx:", self._req_queue.qsize(), self._resp_queue.qsize()
-            print "\n"
+            # print "request queue:", self._req_queue.qsize(), "response queue:", self._resp_queue.qsize()
 
     def stop(self):
         self._req_queue.put(None)
@@ -104,13 +103,15 @@ class GrpcProxy(threading.Thread):
         self._channel = None
 
     def grpc_done_cb(self, future_response):
+        code = future_response.code()
+        if code == StatusCode.OK:
+            exception = None
+        else:
+            exception = future_response.exception()
+
         seq = future_response.seq
-        exception = future_response.exception()
         if exception:
             self._resp_queue.put((seq, None, exception))
         else:
             response = future_response.result()
-            if response is None:
-                print "God something is wrong: response is None", response, exception
-
             self._resp_queue.put((seq, response, None))

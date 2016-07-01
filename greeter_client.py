@@ -32,14 +32,25 @@
 import gevent.monkey
 gevent.monkey.patch_socket()
 
+from gevent.hub import get_hub
+
 from gevent.pool import Pool
 pool = Pool(10)
-spawn_func = pool.spawn
 
 from proxy import GrpcProxy
 import helloworld_pb2
 
-_TIMEOUT_SECONDS = 10
+
+def new_timer(delay, timeout_cb, *args):
+    timer = get_hub().loop.timer(delay, ref=False)
+
+    def timeout_callback():
+        try:
+            timeout_cb(*args)
+        except Exception:
+            pass
+    timer.start(timeout_callback)
+    return timer
 
 
 class TestHello(object):
@@ -49,7 +60,7 @@ class TestHello(object):
         self._proxy2 = None
 
     def start(self):
-        self._spawn = spawn_func
+        self._spawn = pool.spawn
 
         self._proxy1 = GrpcProxy('localhost', 50051, helloworld_pb2.beta_create_Greeter_stub)
         self._proxy1.start()
@@ -60,6 +71,8 @@ class TestHello(object):
         self._proxy2.start()
         self._request_let2 = self._spawn(self.run2)
         self._request_let2.link(self.stop)
+
+        self._report_timer = new_timer(0.001, self.timer_request)
 
     def stop(self, t=None):
         self._request_let1.unlink(self.stop)
@@ -79,6 +92,7 @@ class TestHello(object):
 
             request = helloworld_pb2.HelloRequest(name='you1')
             aync_result = self._proxy1.perform_request('SayHello', request)
+            response = None
             try:
                 response = aync_result.get()
             except Exception, e:
@@ -86,8 +100,6 @@ class TestHello(object):
 
             if response is not None:
                 print("Greeter client received: " + response.message)
-            else:
-                print("Greeter client received None ")
 
     def run2(self):
         while True:
@@ -95,6 +107,14 @@ class TestHello(object):
 
             request = helloworld_pb2.HelloRequest(name='you2')
             self._proxy2.perform_request('SayHello', request)
+            print("Greeter client run2 ")
+
+    def timer_request(self):
+        self._report_timer = None
+        request = helloworld_pb2.HelloRequest(name='you2')
+        self._proxy2.perform_request('SayHello', request)
+        print("Greeter client timer---------------------------------------- ")
+        self._report_timer = new_timer(0.001, self.timer_request)
 
 
 def main():
