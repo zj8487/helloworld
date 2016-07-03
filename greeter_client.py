@@ -29,104 +29,52 @@
 
 """The Python implementation of the GRPC helloworld.Greeter client."""
 
-import gevent.monkey
-gevent.monkey.patch_socket()
+from __future__ import print_function
 
-from gevent.hub import get_hub
+import gc
+gc.set_debug(gc.DEBUG_STATS |
+             gc.DEBUG_LEAK |
+             gc.DEBUG_UNCOLLECTABLE |
+             gc.DEBUG_COLLECTABLE |
+             gc.DEBUG_OBJECTS |
+             gc.DEBUG_INSTANCES)
 
-from gevent.pool import Pool
-pool = Pool(10)
+import time
 
-from proxy import GrpcProxy
+from grpc.beta import implementations
+from grpc import StatusCode
+
 import helloworld_pb2
 
-
-def new_timer(delay, timeout_cb, *args):
-    timer = get_hub().loop.timer(delay, ref=False)
-
-    def timeout_callback():
-        try:
-            timeout_cb(*args)
-        except Exception:
-            pass
-    timer.start(timeout_callback)
-    return timer
+_TIMEOUT_SECONDS = 10
 
 
-class TestHello(object):
+def grpc_done_cb(future_response):
+    code = future_response.code()
+    if code == StatusCode.OK:
+        exception = None
+    else:
+        exception = future_response.exception()
 
-    def __init__(self, ):
-        self._proxy1 = None
-        self._proxy2 = None
-
-    def start(self):
-        self._spawn = pool.spawn
-
-        self._proxy1 = GrpcProxy('localhost', 50051, helloworld_pb2.beta_create_Greeter_stub)
-        self._proxy1.start()
-        self._request_let1 = self._spawn(self.run)
-        self._request_let1.link(self.stop)
-
-        self._proxy2 = GrpcProxy('localhost', 50051, helloworld_pb2.beta_create_Greeter_stub)
-        self._proxy2.start()
-        self._request_let2 = self._spawn(self.run2)
-        self._request_let2.link(self.stop)
-
-        self._report_timer = new_timer(0.001, self.timer_request)
-
-    def stop(self, t=None):
-        self._request_let1.unlink(self.stop)
-        self._request_let2.unlink(self.stop)
-
-        self._proxy1.stop()
-        del self._proxy1
-        self._proxy1 = None
-
-        self._proxy2.stop()
-        del self._proxy2
-        self._proxy2 = None
-
-    def run(self):
-        while True:
-            gevent.sleep(0.001)
-
-            request = helloworld_pb2.HelloRequest(name='you1')
-            aync_result = self._proxy1.perform_request('SayHello', request)
-            response = None
-            try:
-                response = aync_result.get()
-            except Exception, e:
-                print "Greeter client error", e
-
-            if response is not None:
-                print("Greeter client received: " + response.message)
-
-    def run2(self):
-        while True:
-            gevent.sleep(0.02)
-
-            request = helloworld_pb2.HelloRequest(name='you2')
-            self._proxy2.perform_request('SayHello', request)
-            print("Greeter client run2 ")
-
-    def timer_request(self):
-        self._report_timer = None
-        request = helloworld_pb2.HelloRequest(name='you2')
-        self._proxy2.perform_request('SayHello', request)
-        print("Greeter client timer---------------------------------------- ")
-        self._report_timer = new_timer(0.001, self.timer_request)
+    if exception is None:
+        response = future_response.result()
+        # print("Greeter client response:", response)
+        response = None
+    del future_response
 
 
-def main():
-    test_obj = TestHello()
-    test_obj.start()
-
-    try:
-        while True:
-            gevent.sleep(1)
-    except KeyboardInterrupt:
-        test_obj.stop()
+def run():
+    channel = implementations.insecure_channel('localhost', 50051)
+    stub = helloworld_pb2.beta_create_Greeter_stub(channel)
+    counter = 1
+    while True:
+        response = stub.SayHello.future(helloworld_pb2.HelloRequest(name='you'), _TIMEOUT_SECONDS)
+        response.add_done_callback(grpc_done_cb)
+        time.sleep(0.0004)
+        counter += 1
+        if counter % 10000 == 0:
+            print("============================================================Print the request count:", counter)
 
 
 if __name__ == '__main__':
-    main()
+    run()

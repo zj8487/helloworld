@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='helloworld.proto',
   package='helloworld',
   syntax='proto3',
-  serialized_pb=_b('\n\x10helloworld.proto\x12\nhelloworld\"\xbe\x02\n\x0cHelloRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06monney\x18\x02 \x01(\x04\x12\x0b\n\x03\x61ge\x18\x03 \x01(\x04\x12\x0c\n\x04\x61ge1\x18\x04 \x01(\x04\x12\x0c\n\x04\x61ge2\x18\x05 \x01(\x04\x12\x0c\n\x04\x61ge3\x18\x06 \x01(\x04\x12\x0c\n\x04\x61ge4\x18\x07 \x01(\x04\x12\x0c\n\x04\x61ge5\x18\x08 \x01(\x04\x12\x0c\n\x04\x61ge6\x18\t \x01(\x04\x12\x0c\n\x04\x61ge7\x18\n \x01(\x04\x12\x0c\n\x04\x61ge8\x18\x0b \x01(\x04\x12\x0c\n\x04\x61ge9\x18\x0c \x01(\x04\x12\r\n\x05\x61ge10\x18\r \x01(\x04\x12\r\n\x05\x61ge11\x18\x0e \x01(\x04\x12\r\n\x05\x61ge12\x18\x0f \x01(\x04\x12\r\n\x05\x61ge13\x18\x10 \x01(\x04\x12\r\n\x05\x61ge14\x18\x11 \x01(\x04\x12\r\n\x05\x61ge15\x18\x12 \x01(\x04\x12\r\n\x05\x61ge16\x18\x13 \x01(\x04\x12\r\n\x05\x61ge17\x18\x14 \x01(\x04\x12\r\n\x05\x61ge18\x18\x15 \x01(\x04\"\xa4\x01\n\nHelloReply\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\r\n\x05\x61ge10\x18\r \x01(\x04\x12\r\n\x05\x61ge11\x18\x0e \x01(\x04\x12\r\n\x05\x61ge12\x18\x0f \x01(\x04\x12\r\n\x05\x61ge13\x18\x10 \x01(\x04\x12\r\n\x05\x61ge14\x18\x11 \x01(\x04\x12\r\n\x05\x61ge15\x18\x12 \x01(\x04\x12\r\n\x05\x61ge16\x18\x13 \x01(\x04\x12\r\n\x05\x61ge17\x18\x14 \x01(\x04\x12\r\n\x05\x61ge18\x18\x15 \x01(\x04\x32I\n\x07Greeter\x12>\n\x08SayHello\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
+  serialized_pb=_b('\n\x10helloworld.proto\x12\nhelloworld\"\x1c\n\x0cHelloRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1d\n\nHelloReply\x12\x0f\n\x07message\x18\x01 \x01(\t2I\n\x07Greeter\x12>\n\x08SayHello\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -40,146 +40,6 @@ _HELLOREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='monney', full_name='helloworld.HelloRequest.monney', index=1,
-      number=2, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age', full_name='helloworld.HelloRequest.age', index=2,
-      number=3, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age1', full_name='helloworld.HelloRequest.age1', index=3,
-      number=4, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age2', full_name='helloworld.HelloRequest.age2', index=4,
-      number=5, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age3', full_name='helloworld.HelloRequest.age3', index=5,
-      number=6, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age4', full_name='helloworld.HelloRequest.age4', index=6,
-      number=7, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age5', full_name='helloworld.HelloRequest.age5', index=7,
-      number=8, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age6', full_name='helloworld.HelloRequest.age6', index=8,
-      number=9, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age7', full_name='helloworld.HelloRequest.age7', index=9,
-      number=10, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age8', full_name='helloworld.HelloRequest.age8', index=10,
-      number=11, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age9', full_name='helloworld.HelloRequest.age9', index=11,
-      number=12, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age10', full_name='helloworld.HelloRequest.age10', index=12,
-      number=13, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age11', full_name='helloworld.HelloRequest.age11', index=13,
-      number=14, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age12', full_name='helloworld.HelloRequest.age12', index=14,
-      number=15, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age13', full_name='helloworld.HelloRequest.age13', index=15,
-      number=16, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age14', full_name='helloworld.HelloRequest.age14', index=16,
-      number=17, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age15', full_name='helloworld.HelloRequest.age15', index=17,
-      number=18, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age16', full_name='helloworld.HelloRequest.age16', index=18,
-      number=19, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age17', full_name='helloworld.HelloRequest.age17', index=19,
-      number=20, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age18', full_name='helloworld.HelloRequest.age18', index=20,
-      number=21, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -192,8 +52,8 @@ _HELLOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=33,
-  serialized_end=351,
+  serialized_start=32,
+  serialized_end=60,
 )
 
 
@@ -211,69 +71,6 @@ _HELLOREPLY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='age10', full_name='helloworld.HelloReply.age10', index=1,
-      number=13, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age11', full_name='helloworld.HelloReply.age11', index=2,
-      number=14, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age12', full_name='helloworld.HelloReply.age12', index=3,
-      number=15, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age13', full_name='helloworld.HelloReply.age13', index=4,
-      number=16, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age14', full_name='helloworld.HelloReply.age14', index=5,
-      number=17, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age15', full_name='helloworld.HelloReply.age15', index=6,
-      number=18, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age16', full_name='helloworld.HelloReply.age16', index=7,
-      number=19, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age17', full_name='helloworld.HelloReply.age17', index=8,
-      number=20, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='age18', full_name='helloworld.HelloReply.age18', index=9,
-      number=21, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -286,8 +83,8 @@ _HELLOREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=354,
-  serialized_end=518,
+  serialized_start=62,
+  serialized_end=91,
 )
 
 DESCRIPTOR.message_types_by_name['HelloRequest'] = _HELLOREQUEST
@@ -313,19 +110,24 @@ DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b
 import abc
 import six
 from grpc.beta import implementations as beta_implementations
+from grpc.beta import interfaces as beta_interfaces
 from grpc.framework.common import cardinality
 from grpc.framework.interfaces.face import utilities as face_utilities
 
-class BetaGreeterServicer(six.with_metaclass(abc.ABCMeta, object)):
-  """<fill me in later!>"""
-  @abc.abstractmethod
+class BetaGreeterServicer(object):
+  """The greeting service definition.
+  """
   def SayHello(self, request, context):
-    raise NotImplementedError()
+    """Sends a greeting
+    """
+    context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
 
-class BetaGreeterStub(six.with_metaclass(abc.ABCMeta, object)):
-  """The interface to which stubs will conform."""
-  @abc.abstractmethod
+class BetaGreeterStub(object):
+  """The greeting service definition.
+  """
   def SayHello(self, request, timeout):
+    """Sends a greeting
+    """
     raise NotImplementedError()
   SayHello.future = None
 
