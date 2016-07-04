@@ -41,7 +41,7 @@ gc.set_debug(gc.DEBUG_STATS |
 
 import time
 
-from grpc.beta import implementations
+from grpc import insecure_channel
 from grpc import StatusCode
 
 import helloworld_pb2
@@ -58,14 +58,15 @@ def grpc_done_cb(future_response):
 
     if exception is None:
         response = future_response.result()
-        # print("Greeter client response:", response)
+        #print("Greeter client response:", response)
         response = None
     del future_response
+    future_response = None
 
 
 def run():
-    channel = implementations.insecure_channel('localhost', 50051)
-    stub = helloworld_pb2.beta_create_Greeter_stub(channel)
+    channel = insecure_channel('localhost:50051')
+    stub = helloworld_pb2.GreeterStub(channel)
     counter = 1
     while True:
         response = stub.SayHello.future(helloworld_pb2.HelloRequest(name='you'), _TIMEOUT_SECONDS)
