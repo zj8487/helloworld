@@ -42,7 +42,6 @@ gc.set_debug(gc.DEBUG_STATS |
 import time
 
 from grpc import insecure_channel
-from grpc import StatusCode
 
 import helloworld_pb2
 
@@ -50,28 +49,22 @@ _TIMEOUT_SECONDS = 10
 
 
 def grpc_done_cb(future_response):
-    code = future_response.code()
-    if code == StatusCode.OK:
-        exception = None
-    else:
-        exception = future_response.exception()
+    pass
 
-    if exception is None:
-        response = future_response.result()
-        #print("Greeter client response:", response)
-        response = None
-    del future_response
-    future_response = None
+
+def connectivity_update(connectivity):
+    pass
 
 
 def run():
     channel = insecure_channel('localhost:50051')
+    channel.subscribe(connectivity_update, try_to_connect=True)
     stub = helloworld_pb2.GreeterStub(channel)
     counter = 1
     while True:
         response = stub.SayHello.future(helloworld_pb2.HelloRequest(name='you'), _TIMEOUT_SECONDS)
         response.add_done_callback(grpc_done_cb)
-        time.sleep(0.0004)
+        time.sleep(0.001)
         counter += 1
         if counter % 10000 == 0:
             print("============================================================Print the request count:", counter)
